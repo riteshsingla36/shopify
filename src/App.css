@@ -1,0 +1,72 @@
+
+
+.signup, .login, .edit-product, .edit-profile, .add-product {
+  margin-left: 100px;
+}
+
+.signup input {
+  display: block;
+  margin-top: 5px;
+}
+
+.signup span {
+  color: red;
+  font-size: x-small;
+  margin: 0;
+  position: relative;
+  top:-10px;
+}
+
+.signup button {
+  border-radius: 3px;
+  width: 100px;
+  padding: 5px 10px;
+  margin-top: 30px;
+  display: block;
+}
+
+.login input {
+  display: block;
+  margin-top: 5px;
+}
+
+.login span {
+  color: red;
+  font-size: x-small;
+  margin: 0;
+  position: relative;
+  top:-10px;
+}
+
+.login p {
+  margin: 0;
+}
+
+.login button {
+  border-radius: 3px;
+  width: 100px;
+  padding: 5px 10px;
+  margin-top: 30px;
+  display: block;
+}
+
+.edit-product input {
+  display: block;
+  margin-top: 5px;
+}
+
+.edit-product span {
+  color: red;
+  font-size: x-small;
+  margin: 0;
+  position: relative;
+  top:-10px;
+}
+
+.edit-product button {
+  border-radius: 3px;
+  margin-top: 30px;
+  width: 100px;
+  padding: 5px 10px;
+  display: block;
+}
