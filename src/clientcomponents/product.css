@@ -1,0 +1,12 @@
+.single-product {
+    border: 1px solid silver;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px 10px;
+    width: fit-content;
+}
+
+.single-product img {
+    width: 200px;
+    height: 200px;
+}

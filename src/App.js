@@ -1,19 +1,27 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Signup from './components/Signup';
-import Navbar from "./components/Navbar"
-import PrivateRoute from './components/PrivateRoute';
-import Login from './components/Login';
-import Products from './components/Products';
-import AddProduct from './components/AddProduct';
-import EditProduct from './components/EditProduct';
-import EditProfile from './components/EditProfile';
+import Signup from './sellerComponents/Signup';
+import Navbar from "./sellerComponents/Navbar"
+import PrivateRoute from './sellerComponents/PrivateRoute';
+import Login from './sellerComponents/Login';
+import Products from './sellerComponents/Products';
+import AddProduct from './sellerComponents/AddProduct';
+import EditProduct from './sellerComponents/EditProduct';
+import EditProfile from './sellerComponents/EditProfile';
+
+import Home from "./clientcomponents/Home"
+import Navbars from './clientcomponents/Navbars';
+import UserLogin from './clientcomponents/UserLogin';
+import UserSignup from './clientcomponents/UserSignup';
+import Cart from './clientcomponents/Cart';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbars />
       <Routes>
+        {/* seller routes */}
         <Route element={<PrivateRoute />}>
           <Route path="/seller" element={<Products />} />
           <Route path="/seller/add-product" element={<AddProduct />} />
@@ -22,6 +30,13 @@ function App() {
         </Route>
         <Route path='/seller/signup' element={<Signup />} />
         <Route path='/seller/login' element={<Login />} />
+        {/* seller routes end */}
+
+
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<UserLogin />} />
+        <Route path='/signup' element={<UserSignup />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
     </div>
   );

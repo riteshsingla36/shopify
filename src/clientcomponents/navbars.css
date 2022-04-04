@@ -1,0 +1,10 @@
+.navbars {
+    background-color: burlywood;
+    padding: 5px 20px;
+    color: white;
+    height: fit-content;
+    margin-bottom: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
