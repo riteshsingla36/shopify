@@ -15,13 +15,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Products />} />
-          <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/edit-product/:id" element={<EditProduct />} />
-          <Route path="/edit-profile/:id" element={<EditProfile />} />
+          <Route path="/seller" element={<Products />} />
+          <Route path="/seller/add-product" element={<AddProduct />} />
+          <Route path="/seller/edit-product/:id" element={<EditProduct />} />
+          <Route path="/seller/edit-profile/:id" element={<EditProfile />} />
         </Route>
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/seller/signup' element={<Signup />} />
+        <Route path='/seller/login' element={<Login />} />
       </Routes>
     </div>
   );

@@ -49,7 +49,7 @@ const EditProduct = () => {
       )
       .then(() => {
         alert("successfully updated product");
-        navigate("/");
+        navigate("/seller");
       })
       .catch((err) => alert(err.message));
   };

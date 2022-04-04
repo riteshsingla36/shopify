@@ -12,7 +12,7 @@ const Signup = () => {
   useEffect(() => {
     const auth = localStorage.getItem("seller");
     if (auth) {
-      navigate("/");
+      navigate("/seller");
     }
   }, []);
 
@@ -26,7 +26,7 @@ const Signup = () => {
       .then((data) => {
         localStorage.setItem("seller", JSON.stringify(data.data.seller));
         localStorage.setItem("token", JSON.stringify(data.data.auth));
-        navigate("/");
+        navigate("/seller");
       })
       .catch((err) => alert("pta nhi kya hua"));
   };

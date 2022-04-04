@@ -67,7 +67,7 @@ const Products = () => {
               <td>
                 <button
                   onClick={() => {
-                    navigate(`/edit-product/${product._id}`);
+                    navigate(`/seller/edit-product/${product._id}`);
                   }}
                 >
                   Edit

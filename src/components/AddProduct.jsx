@@ -33,7 +33,7 @@ const AddProduct = () => {
           setCategory("");
           setBrand("");
         } else {
-          navigate("/");
+          navigate("/seller");
         }
       })
       .catch((err) => alert(err.message));

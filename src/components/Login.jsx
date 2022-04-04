@@ -14,7 +14,7 @@ const Login = () => {
   useEffect(() => {
     const auth = localStorage.getItem("seller");
     if (auth) {
-      navigate("/");
+      navigate("/seller");
     }
   }, []);
 
@@ -29,7 +29,7 @@ const Login = () => {
         if (data.data.seller) {
           localStorage.setItem("seller", JSON.stringify(data.data.seller));
           localStorage.setItem("token", JSON.stringify(data.data.auth));
-          navigate("/");
+          navigate("/seller");
         } else {
           alert("pher pta nhi kya hua");
         }
