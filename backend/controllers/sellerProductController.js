@@ -1,8 +1,7 @@
 const express = require("express")
 const Product = require("../models/productModel")
-const Jwt = require("jsonwebtoken")
 const authenticator = require("../middleware/authmiddleware")
-const Jwtkey = "ritesh"
+
 
 const router = express.Router()
 

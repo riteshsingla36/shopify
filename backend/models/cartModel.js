@@ -8,6 +8,11 @@ const cartSchema = mongoose.Schema({
     active: {
         type: Boolean,
         default: true
+    },
+    total: {
+        type: Number,
+        trim: true,
+        default: true
     }
 })
 

@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Signup from './sellerComponents/Signup';
-import Navbar from "./sellerComponents/Navbar"
+
 import PrivateRoute from './sellerComponents/PrivateRoute';
 import Login from './sellerComponents/Login';
 import Products from './sellerComponents/Products';
@@ -14,12 +14,15 @@ import Navbars from './clientcomponents/Navbars';
 import UserLogin from './clientcomponents/UserLogin';
 import UserSignup from './clientcomponents/UserSignup';
 import Cart from './clientcomponents/Cart';
+import UserPrivateRoute from './clientcomponents/UserPrivateRoute';
+import CreateAddress from './clientcomponents/CreateAddress';
+import Address from './clientcomponents/Address';
 
 function App() {
   return (
     <div className="App">
       {/* <Navbar /> */}
-      <Navbars />
+      {/* <Navbars /> */}
       <Routes>
         {/* seller routes */}
         <Route element={<PrivateRoute />}>
@@ -33,10 +36,14 @@ function App() {
         {/* seller routes end */}
 
 
-        <Route path='/' element={<Home />} />
+        <Route element={<UserPrivateRoute />} >
+          <Route path='/' element={<Home />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/create-address' element={<CreateAddress />} />
+          <Route path='/address' element={<Address />} />
+        </Route>
         <Route path='/login' element={<UserLogin />} />
         <Route path='/signup' element={<UserSignup />} />
-        <Route path='/cart' element={<Cart />} />
       </Routes>
     </div>
   );

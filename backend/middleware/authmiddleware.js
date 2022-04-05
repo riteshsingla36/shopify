@@ -1,11 +1,11 @@
 const Jwt = require("jsonwebtoken")
-const Jwtkey = "ritesh"
+
 
 
 const authenticator = async (req, res, next) => {
     const token = req.headers["token"]
     if (token) {
-        Jwt.verify(token, Jwtkey, (err, valid) => {
+        Jwt.verify(token, process.env.JWT_KEY, (err, valid) => {
             if (err) {
                 res.status(401).json({ error: "some error occured" })
             }

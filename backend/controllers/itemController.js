@@ -34,6 +34,15 @@ router.patch("/:id", async (req, res) => {
         res.json({ error: err.message })
     }
 })
+router.delete("/:id", async (req, res) => {
+    try {
+        const item = await Item.findByIdAndDelete(req.params.id)
+        res.json(item)
+    }
+    catch (err) {
+        res.json({ error: err.message })
+    }
+})
 
 
 module.exports = router

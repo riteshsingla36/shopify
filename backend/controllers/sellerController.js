@@ -2,7 +2,7 @@ const express = require("express")
 const Seller = require("../models/sellerModel")
 const Jwt = require("jsonwebtoken")
 const authenticator = require("../middleware/authmiddleware")
-const Jwtkey = "ritesh"
+
 
 const router = express.Router()
 
@@ -30,7 +30,7 @@ router.post("/signup", async (req, res) => {
     if (req.body.name && req.body.email && req.body.password) {
         try {
             const seller = await Seller.create(req.body)
-            Jwt.sign({ seller }, Jwtkey, { expiresIn: "2h" }, (err, token) => {
+            Jwt.sign({ seller }, process.env.JWT_KEY, { expiresIn: "2h" }, (err, token) => {
                 if (err) {
                     res.json({ error: "please check details again" })
                 }
@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
     if (req.body.email && req.body.password) {
         try {
             const seller = await Seller.findOne(req.body).select("-password")
-            Jwt.sign({ seller }, Jwtkey, { expiresIn: "2h" }, (err, token) => {
+            Jwt.sign({ seller }, process.env.JWT_KEY, { expiresIn: "2h" }, (err, token) => {
                 if (err) {
                     res.status(400).json({ error: err.message })
                 }

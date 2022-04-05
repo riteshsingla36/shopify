@@ -2,7 +2,6 @@ const express = require("express")
 const User = require("../models/userModel")
 const Jwt = require("jsonwebtoken")
 const authenticator = require("../middleware/authmiddleware")
-const Jwtkey = "ritesh"
 
 
 const router = express.Router()
@@ -32,7 +31,7 @@ router.post("/signup", async (req, res) => {
     if (req.body.name && req.body.email && req.body.password) {
         try {
             const user = await User.create(req.body)
-            Jwt.sign({ user }, Jwtkey, { expiresIn: "2h" }, (err, token) => {
+            Jwt.sign({ user }, process.env.JWT_KEY, { expiresIn: "2h" }, (err, token) => {
                 if (err) {
                     res.json({ error: "please check details again" })
                 }
@@ -52,7 +51,7 @@ router.post("/login", async (req, res) => {
 
     try {
         const user = await User.findOne(req.body).select("-password")
-        Jwt.sign({ user }, Jwtkey, { expiresIn: "2h" }, (err, token) => {
+        Jwt.sign({ user }, process.env.JWT_KEY, { expiresIn: "2h" }, (err, token) => {
             if (err) {
                 res.status(400).json({ error: err.message })
             }
