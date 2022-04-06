@@ -12,8 +12,28 @@ const cartSchema = mongoose.Schema({
     total: {
         type: Number,
         trim: true,
-        default: true
+        default: 0
+    },
+    isPaid: {
+        type: Boolean,
+        default: false
+    },
+    razorpay: {
+        orderId: String,
+        paymentId: String,
+        signature: String
+    },
+    address: {
+        type: Object
+    },
+    products: [{
+        type: Object
+    }]
+},
+    {
+        versionKey: false,
+        timestamps: true
     }
-})
+)
 
 module.exports = mongoose.model("cart", cartSchema)

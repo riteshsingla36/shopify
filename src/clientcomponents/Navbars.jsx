@@ -18,12 +18,14 @@ const Navbars = () => {
       />
       {auth ? (
         <>
+          <span onClick={() => navigate("/orders")}>Orders</span>
           <span onClick={() => navigate("/cart")}>
             <ShoppingCartIcon />
           </span>
           <span
             onClick={() => {
               localStorage.clear();
+              window.location.reload();
               navigate("/login");
             }}
           >

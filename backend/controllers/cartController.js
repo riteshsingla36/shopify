@@ -41,4 +41,27 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.patch("/:id/pay-order", async (req, res) => {
+    try {
+        const { amount, razorpayPaymentId, razorpayOrderId, razorpaySignature, address, products } = req.body;
+
+        await Cart.findByIdAndUpdate(req.params.id, {
+            isPaid: true,
+            active: false,
+            total: amount,
+            razorpay: {
+                orderId: razorpayOrderId,
+                paymentId: razorpayPaymentId,
+                signature: razorpaySignature
+            },
+            address: address,
+            products: products
+        })
+
+        res.send({ msg: "Payment is successful" })
+    }
+    catch (err) {
+        res.status(500).send(err)
+    }
+})
 module.exports = router

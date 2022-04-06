@@ -104,7 +104,14 @@ const Cart = () => {
         </tbody>
       </table>
 
-      <button onClick={() => navigate("/address")}>Checkout</button>
+      <button
+        onClick={() => {
+          navigate("/address");
+          sessionStorage.setItem("total", JSON.stringify(total));
+        }}
+      >
+        Checkout
+      </button>
     </div>
   );
 };

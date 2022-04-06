@@ -10,19 +10,22 @@ import EditProduct from './sellerComponents/EditProduct';
 import EditProfile from './sellerComponents/EditProfile';
 
 import Home from "./clientcomponents/Home"
-import Navbars from './clientcomponents/Navbars';
 import UserLogin from './clientcomponents/UserLogin';
 import UserSignup from './clientcomponents/UserSignup';
 import Cart from './clientcomponents/Cart';
 import UserPrivateRoute from './clientcomponents/UserPrivateRoute';
 import CreateAddress from './clientcomponents/CreateAddress';
 import Address from './clientcomponents/Address';
+import Navbar from './sellerComponents/Navbar';
+import Navbars from './clientcomponents/Navbars';
+import Orders from './clientcomponents/Orders';
+import OrderDetails from './clientcomponents/OrderDetails';
 
 function App() {
   return (
     <div className="App">
       {/* <Navbar /> */}
-      {/* <Navbars /> */}
+
       <Routes>
         {/* seller routes */}
         <Route element={<PrivateRoute />}>
@@ -31,8 +34,8 @@ function App() {
           <Route path="/seller/edit-product/:id" element={<EditProduct />} />
           <Route path="/seller/edit-profile/:id" element={<EditProfile />} />
         </Route>
-        <Route path='/seller/signup' element={<Signup />} />
-        <Route path='/seller/login' element={<Login />} />
+        <Route path='/seller/signup' element={<><Navbar /><Signup /></>} />
+        <Route path='/seller/login' element={<><Navbar /><Login /></>} />
         {/* seller routes end */}
 
 
@@ -41,9 +44,11 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/create-address' element={<CreateAddress />} />
           <Route path='/address' element={<Address />} />
+          <Route path='/orders' element={<Orders />} />
+          <Route path='/order/:id' element={<OrderDetails />} />
         </Route>
-        <Route path='/login' element={<UserLogin />} />
-        <Route path='/signup' element={<UserSignup />} />
+        <Route path='/login' element={<><Navbars /><UserLogin /></>} />
+        <Route path='/signup' element={<><Navbars /><UserSignup /></>} />
       </Routes>
     </div>
   );

@@ -2,7 +2,9 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const app = express()
+const Razorpay = require("Razorpay")
 const dotenv = require('dotenv')
+const Cart = require("./models/cartModel")
 
 const sellerController = require("./controllers/sellerController")
 const productController = require("./controllers/sellerProductController")
@@ -32,5 +34,34 @@ app.use("/user", userController)
 app.use("/cart", cartController)
 app.use('/item', itemController)
 app.use("/address", addressController)
+
+app.get("/get-razorpay-key", async (req, res) => {
+    res.send({ key: process.env.RAZORPAY_KEY });
+})
+
+
+app.post("/create-order", async (req, res) => {
+    try {
+        const instance = new Razorpay({
+            key_id: process.env.RAZORPAY_KEY,
+            key_secret: process.env.RAZORPAY_SECRET
+        });
+        const options = {
+            amount: req.body.amount,
+            currency: "INR"
+        }
+        const order = await instance.orders.create(options)
+        if (!order) {
+            return res.status(500).send("Some Error Occured");
+        }
+        res.send(order)
+    }
+    catch (err) {
+        res.status(500).send(err)
+    }
+})
+
+
+
 
 app.listen(8000, console.log("listening to port 8000......"))
