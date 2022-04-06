@@ -36,7 +36,7 @@ function App() {
         </Route>
         <Route path='/seller/signup' element={<><Navbar /><Signup /></>} />
         <Route path='/seller/login' element={<><Navbar /><Login /></>} />
-        {/* seller routes end */}
+
 
 
         <Route element={<UserPrivateRoute />} >
