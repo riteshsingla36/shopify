@@ -25,7 +25,6 @@ function App() {
   return (
     <div className="App">
       {/* <Navbar /> */}
-
       <Routes>
         {/* seller routes */}
         <Route element={<PrivateRoute />}>
@@ -37,8 +36,7 @@ function App() {
         <Route path='/seller/signup' element={<><Navbar /><Signup /></>} />
         <Route path='/seller/login' element={<><Navbar /><Login /></>} />
 
-
-
+{/* user routes */}
         <Route element={<UserPrivateRoute />} >
           <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />

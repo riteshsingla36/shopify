@@ -50,30 +50,35 @@ const CreateAddress = () => {
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        placeholder="Enter Name"
       />
       {error && !name && <span>Name is required</span>}
       <input
         type="text"
         value={flat}
         onChange={(e) => setFlat(e.target.value)}
+        placeholder="Enter flat no. or name"
       />
       {error && !flat && <span>Flat is required</span>}
       <input
         type="text"
         value={area}
         onChange={(e) => setArea(e.target.value)}
+        placeholder="Enter area"
       />
       {error && !area && <span>Area is required</span>}
       <input
         type="text"
         value={city}
         onChange={(e) => setCity(e.target.value)}
+        placeholder="Enter city"
       />
       {error && !city && <span>City is required</span>}
       <input
         type="text"
         value={state}
         onChange={(e) => setState(e.target.value)}
+        placeholder="Enter state"
       />
       {error && !state && <span>State is required</span>}
       <input
@@ -81,6 +86,7 @@ const CreateAddress = () => {
         max="999999"
         value={pincode}
         onChange={(e) => setPincode(e.target.value)}
+        placeholder="Enter pincode"
       />
       {error && !pincode && <span>pincode is required</span>}
       <input
@@ -88,6 +94,7 @@ const CreateAddress = () => {
         max="9999999999"
         value={mobile}
         onChange={(e) => setMobile(e.target.value)}
+        placeholder="Enter mobile number"
       />
       {error && !mobile && <span>Mobile is required</span>}
 
