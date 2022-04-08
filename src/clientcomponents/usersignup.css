@@ -1,0 +1,37 @@
+.user-signup {
+    margin: auto;
+    width: fit-content;
+    padding: 20px;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
+
+
+.user-signup .user-signup-password {
+    display: flex;
+    align-items: center;
+}
+
+.user-signup .pswd-show {
+    color: rgb(143, 143, 143);
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.user-signup p {
+    display: block;
+}
+
+.user-signup button {
+    padding: 3px 40px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.error {
+    font-size: xx-small;
+    color: red;
+}

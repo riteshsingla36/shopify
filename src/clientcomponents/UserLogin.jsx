@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import "./userlogin.css";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -43,24 +44,31 @@ const UserLogin = () => {
       .catch((err) => alert("seller not found"));
   };
   return (
-    <div className="login">
+    <div className="user-login">
       <h1>Login</h1>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter email"
-      />
-      {error && !email && <span>email is required</span>}
-      <input
-        type={show ? "text" : "password"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter password"
-      />
-      {error && !password && <span>password is required</span>}
-      <p onClick={() => setShow(!show)}>
-        {show ? <VisibilityOffIcon /> : <VisibilityIcon />}
+      <p>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
+        />
+        {error && !email && <span className="error">email is required</span>}
+      </p>
+
+      <p className="user-login-password">
+        <input
+          type={show ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter password"
+        />
+        <span className="pswd-show" onClick={() => setShow(!show)}>
+          {show ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        </span>
+        {error && !password && (
+          <span className="error">password is required</span>
+        )}
       </p>
 
       <button onClick={handleLogin}>Login</button>

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import "./usersignup.css";
 
 const UserSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,31 +40,42 @@ const UserSignup = () => {
       })
       .catch((err) => alert("pta nhi kya hua"));
   };
-  
+
   return (
-    <div className="signup">
+    <div className="user-signup">
       <h1>Signup</h1>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Enter name"
-      />
-      {error && !name && <span>name is required</span>}
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter email"
-      />
-      {error && !email && <span>email is required</span>}
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter password"
-      />
-      {error && !password && <span>password is required</span>}
+      <p>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter name"
+        />
+        {error && !name && <span className="error">name is required</span>}
+      </p>
+      <p>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
+        />
+        {error && !email && <span className="error">email is required</span>}
+      </p>
+      <p className="user-signup-password">
+        <input
+          type={show ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter password"
+        />
+        <span className="pswd-show" onClick={() => setShow(!show)}>
+          {show ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        </span>
+        {error && !password && (
+          <span className="error">password is required</span>
+        )}
+      </p>
 
       <button onClick={() => handleSignup()}>Signup</button>
     </div>

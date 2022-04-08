@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+import "./navbar.css";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,7 +37,7 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   return (
-    <AppBar position="static">
+    <AppBar position="static" class="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -202,6 +203,7 @@ const Navbar = () => {
                   >
                     Profile
                   </Typography>
+                  <br />
                   <Typography textAlign="center">Dashboard</Typography>
                   <Typography
                     textAlign="center"
@@ -209,6 +211,7 @@ const Navbar = () => {
                   >
                     Add Product
                   </Typography>
+                  <br />
                   <Typography
                     textAlign="center"
                     onClick={() => {
@@ -218,6 +221,7 @@ const Navbar = () => {
                   >
                     Logout
                   </Typography>
+                  <br />
                 </MenuItem>
               </Menu>
             </Box>
