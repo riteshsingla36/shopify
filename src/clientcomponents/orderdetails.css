@@ -1,0 +1,9 @@
+.user-order-details-inner {
+    display: flex;
+}
+
+.user-order-details-inner table {
+    width: 70%;
+    text-align: center;
+    margin: auto;
+}

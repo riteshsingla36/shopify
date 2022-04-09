@@ -3,6 +3,7 @@ import React, { useLayoutEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Products from "./Products";
 import { get_cart_items } from "../Redux/cart/actions";
+import { Container } from "@mui/material";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,10 @@ const Home = () => {
         setProducts(data.data);
         axios
           .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`)
-          .then((data) => dispatch(get_cart_items(data.data)));
+          .then((data) => {
+            sessionStorage.setItem("items", JSON.stringify(data.data));
+            dispatch(get_cart_items(data.data));
+          });
       })
       .catch((err) => alert(err.message));
   };
@@ -25,9 +29,9 @@ const Home = () => {
     getAllProducts();
   }, []);
   return (
-    <div className="home">
+    <Container className="home">
       <Products products={products} />
-    </div>
+    </Container>
   );
 };
 

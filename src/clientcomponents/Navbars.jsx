@@ -2,10 +2,12 @@ import React from "react";
 import "./navbars.css";
 import { useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useSelector } from "react-redux";
 
 const Navbars = () => {
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");
+  const cartItems = useSelector((store) => store.cartReducer.cartItems);
   return (
     <div className="navbars">
       <img
@@ -17,26 +19,31 @@ const Navbars = () => {
         onClick={() => navigate("/")}
       />
       {auth ? (
-        <>
+        <span className="navbars-right">
           <span onClick={() => navigate("/orders")}>Orders</span>
-          <span onClick={() => navigate("/cart")}>
+          <span
+            style={{ position: "relative" }}
+            onClick={() => navigate("/cart")}
+          >
             <ShoppingCartIcon />
+            <span className="cart-icon">{cartItems.length}</span>
           </span>
           <span
             onClick={() => {
               localStorage.clear();
+              sessionStorage.clear();
               window.location.reload();
               navigate("/login");
             }}
           >
             Logout
           </span>
-        </>
+        </span>
       ) : (
-        <>
+        <span className="navbars-right">
           <span onClick={() => navigate("/login")}>Login</span>
           <span onClick={() => navigate("/signup")}>Signup</span>
-        </>
+        </span>
       )}
     </div>
   );

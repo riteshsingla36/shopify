@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./orders.css";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -24,7 +25,7 @@ const Orders = () => {
     get_orders();
   }, []);
   return (
-    <div>
+    <div className="user-orders">
       <h1>Orders</h1>
 
       <table border="1">

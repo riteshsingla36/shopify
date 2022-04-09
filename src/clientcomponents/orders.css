@@ -1,0 +1,9 @@
+.user-orders h1 {
+    text-align: center;
+}
+
+.user-orders table {
+    margin: auto;
+    text-align: center;
+    width: 80%;
+}

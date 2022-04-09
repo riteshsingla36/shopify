@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Address = () => {
+  const navigate = useNavigate();
+  if (JSON.parse(sessionStorage.getItem("total")) ===0) {
+      navigate("/cart")
+  }
   const [addresses, setAddresses] = useState([]);
   const [currentAdd, setCurrentAdd] = useState("");
-  const navigate = useNavigate();
   const id = JSON.parse(localStorage.getItem("user"))._id;
   useEffect(() => {
     axios

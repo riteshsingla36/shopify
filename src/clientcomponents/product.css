@@ -10,3 +10,14 @@
     width: 200px;
     height: 200px;
 }
+
+.btns {
+        display: flex;
+    align-items: center;
+}
+
+.delete-icon {
+    background-color: transparent;
+    border: none;
+    color: gray;
+}

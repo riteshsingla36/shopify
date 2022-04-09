@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { get_cart_items } from "../Redux/cart/actions";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import "./cart.css";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cartReducer.cartItems);
@@ -19,12 +22,14 @@ const Cart = () => {
       sum += arr[i].quantity * arr[i].product.price;
     }
     setTotal(sum);
+    localStorage.setItem("total", JSON.stringify(sum));
   }
 
   function getallItems() {
     axios
       .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`)
       .then((data) => {
+        sessionStorage.setItem("items", JSON.stringify(data.data));
         dispatch(get_cart_items(data.data));
         calculate(data.data);
       });
@@ -45,14 +50,14 @@ const Cart = () => {
   }
 
   return (
-    <div>
+    <div className="user-cart">
       <table border="1" style={{ margin: "auto" }}>
         <thead>
           <tr>
             <th>Image</th>
             <th>Name</th>
             <th>Quantity</th>
-            <th>Change Qty.</th>
+
             <th>Price</th>
             <th>Total</th>
           </tr>
@@ -75,19 +80,18 @@ const Cart = () => {
                 </td>
                 <td>
                   <span>{item.quantity}</span>
+                  <span className="update-quantity">
+                    <ArrowDropUpIcon
+                      onClick={() => updateQty(item._id, item.quantity + 1)}
+                    />
+
+                    <ArrowDropDownIcon
+                      className="down-arrow"
+                      onClick={() => updateQty(item._id, item.quantity - 1)}
+                    />
+                  </span>
                 </td>
-                <td>
-                  <button
-                    onClick={() => updateQty(item._id, item.quantity + 1)}
-                  >
-                    Inc
-                  </button>
-                  <button
-                    onClick={() => updateQty(item._id, item.quantity - 1)}
-                  >
-                    Dec
-                  </button>
-                </td>
+
                 <td>
                   <span>{item.product.price}</span>
                 </td>
@@ -98,7 +102,7 @@ const Cart = () => {
             );
           })}
           <tr>
-            <td colSpan="5">Total</td>
+            <td colSpan="4">Total</td>
             <td>{total}</td>
           </tr>
         </tbody>
