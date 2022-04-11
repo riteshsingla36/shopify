@@ -26,7 +26,6 @@ const Product = ({ product }) => {
       });
   }
 
-
   const addToCart = (id) => {
     axios
       .post(`/item`, {
