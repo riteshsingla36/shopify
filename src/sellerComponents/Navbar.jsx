@@ -84,7 +84,7 @@ const Navbar = () => {
           </span>
         </span>
       ) : (
-        <span className="navbars-right">
+        <span className="navbarsc-right">
           <span onClick={() => navigate("/seller/login")}>Login</span>
           <span onClick={() => navigate("/seller/signup")}>Signup</span>
         </span>
