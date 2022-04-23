@@ -1,8 +1,9 @@
 const router = require("express").Router()
+const authenticator = require("../middleware/authmiddleware")
 const Cart = require("../models/cartModel")
 
 
-router.get("/", async (req, res) => {
+router.get("/", authenticator, async (req, res) => {
     var q = {}
     if (req.query.user) {
         q["user"] = req.query.user
@@ -21,7 +22,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authenticator, async (req, res) => {
     try {
         const cart = await Cart.findById(req.params.id)
         res.status(200).json(cart)
@@ -31,7 +32,7 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", authenticator, async (req, res) => {
     try {
         const cart = await Cart.create(req.body)
         res.status(201).json(cart)
@@ -41,7 +42,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.patch("/:id/pay-order", async (req, res) => {
+router.patch("/:id/pay-order", authenticator, async (req, res) => {
     try {
         const { amount, razorpayPaymentId, razorpayOrderId, razorpaySignature, address, products } = req.body;
 

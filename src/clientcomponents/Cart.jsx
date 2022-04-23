@@ -27,7 +27,11 @@ const Cart = () => {
 
   function getallItems() {
     axios
-      .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`)
+      .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`, {
+        headers: {
+          token: JSON.parse(localStorage.getItem("token")),
+        },
+      })
       .then((data) => {
         sessionStorage.setItem("items", JSON.stringify(data.data));
         dispatch(get_cart_items(data.data));
@@ -38,12 +42,25 @@ const Cart = () => {
   function updateQty(id, qty) {
     if (qty === 0) {
       axios
-        .delete(`/item/${id}`)
+        .delete(`/item/${id}`, {
+          headers: {
+            token: JSON.parse(localStorage.getItem("token")),
+          },
+        })
         .then(() => getallItems())
         .catch((err) => alert(err.message));
     } else {
       axios
-        .patch(`/item/${id}`, { quantity: qty }, { new: true })
+        .patch(
+          `/item/${id}`,
+          { quantity: qty },
+          {
+            headers: {
+              token: JSON.parse(localStorage.getItem("token")),
+            },
+          },
+          { new: true }
+        )
         .then(() => getallItems())
         .catch((err) => alert(err.message));
     }
@@ -82,6 +99,7 @@ const Cart = () => {
                   <span>{item.quantity}</span>
                   <span className="update-quantity">
                     <ArrowDropUpIcon
+                      className="up-arrow"
                       onClick={() => updateQty(item._id, item.quantity + 1)}
                     />
 

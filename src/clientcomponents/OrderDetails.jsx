@@ -11,14 +11,17 @@ const OrderDetails = () => {
   const [address, setAddress] = useState({});
 
   const get_order = () => {
-    axios.get(`/cart/${id}`).then((data) => {
-      setProducts(data.data.products);
-      setTotal(data.data.total);
-      setAddress(data.data.address);
-      console.log(data.data.products);
-      console.log(data.data.total);
-      console.log(data.data.address);
-    });
+    axios
+      .get(`/cart/${id}`, {
+        headers: {
+          token: JSON.parse(localStorage.getItem("token")),
+        },
+      })
+      .then((data) => {
+        setProducts(data.data.products);
+        setTotal(data.data.total);
+        setAddress(data.data.address);
+      });
   };
   useLayoutEffect(() => {
     get_order();

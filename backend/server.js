@@ -13,6 +13,7 @@ const userController = require("./controllers/userController")
 const cartController = require("./controllers/cartController")
 const itemController = require("./controllers/itemController")
 const addressController = require("./controllers/addressController")
+const authenticator = require("./middleware/authmiddleware")
 
 dotenv.config({ path: "./.env" })
 mongoose.connect(process.env.DB_URI).then(() => console.log("mongodb connected successfully...")).catch(err => console.log(err.message))
@@ -40,7 +41,7 @@ app.get("/get-razorpay-key", async (req, res) => {
 })
 
 
-app.post("/create-order", async (req, res) => {
+app.post("/create-order", authenticator, async (req, res) => {
     try {
         const instance = new Razorpay({
             key_id: process.env.RAZORPAY_KEY,

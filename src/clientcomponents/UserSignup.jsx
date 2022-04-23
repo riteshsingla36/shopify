@@ -30,15 +30,24 @@ const UserSignup = () => {
       .then((data) => {
         localStorage.setItem("user", JSON.stringify(data.data.user));
         localStorage.setItem("token", JSON.stringify(data.data.auth));
+
         axios
-          .post("/cart", { user: data.data.user._id })
+          .post(
+            "/cart",
+            { user: data.data.user._id },
+            {
+              headers: {
+                token: JSON.parse(localStorage.getItem("token")),
+              },
+            }
+          )
           .then((data) =>
             localStorage.setItem("cart", JSON.stringify(data.data._id))
           )
           .catch();
         navigate("/");
       })
-      .catch((err) => alert("pta nhi kya hua"));
+      .catch((err) => alert("Error Occured please check all the details"));
   };
 
   return (

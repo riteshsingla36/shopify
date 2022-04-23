@@ -1,7 +1,8 @@
 const router = require("express").Router()
+const authenticator = require("../middleware/authmiddleware")
 const Item = require("../models/itemModel")
 
-router.get("/", async (req, res) => {
+router.get("/", authenticator, async (req, res) => {
     let q = {}
     if (req.query.cart) {
         q["cart"] = req.query.cart
@@ -15,7 +16,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", authenticator, async (req, res) => {
     try {
         const item = await Item.create(req.body)
         res.json(item)
@@ -25,7 +26,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", authenticator, async (req, res) => {
     try {
         const item = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(item)
@@ -34,7 +35,7 @@ router.patch("/:id", async (req, res) => {
         res.json({ error: err.message })
     }
 })
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticator, async (req, res) => {
     try {
         const item = await Item.findByIdAndDelete(req.params.id)
         res.json(item)

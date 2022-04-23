@@ -31,17 +31,21 @@ const UserLogin = () => {
           localStorage.setItem("user", JSON.stringify(data.data.user));
           localStorage.setItem("token", JSON.stringify(data.data.auth));
           axios
-            .get(`/cart?user=${data.data.user._id}&active=true`)
+            .get(`/cart?user=${data.data.user._id}&active=true`, {
+              headers: {
+                token: JSON.parse(localStorage.getItem("token")),
+              },
+            })
             .then((data) => {
               localStorage.setItem("cart", JSON.stringify(data.data[0]._id));
             })
             .catch((err) => alert(err.message));
           navigate("/");
         } else {
-          alert("pher pta nhi kya hua");
+          alert("Email or password is incorrect");
         }
       })
-      .catch((err) => alert("seller not found"));
+      .catch((err) => alert("user not found"));
   };
   return (
     <div className="user-login">

@@ -5,7 +5,7 @@ const authenticator = require("../middleware/authmiddleware")
 const router = express.Router()
 
 
-router.get("/all", async (req, res) => {
+router.get("/all", authenticator, async (req, res) => {
     try {
         const products = await Product.find().populate("seller")
         res.status(200).json(products)

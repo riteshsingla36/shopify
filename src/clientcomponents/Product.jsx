@@ -19,7 +19,11 @@ const Product = ({ product }) => {
 
   function getallItems() {
     axios
-      .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`)
+      .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`, {
+        headers: {
+          token: JSON.parse(localStorage.getItem("token")),
+        },
+      })
       .then((data) => {
         sessionStorage.setItem("items", JSON.stringify(data.data));
         dispatch(get_cart_items(data.data));
@@ -28,10 +32,18 @@ const Product = ({ product }) => {
 
   const addToCart = (id) => {
     axios
-      .post(`/item`, {
-        cart: JSON.parse(localStorage.getItem("cart")),
-        product: id,
-      })
+      .post(
+        `/item`,
+        {
+          cart: JSON.parse(localStorage.getItem("cart")),
+          product: id,
+        },
+        {
+          headers: {
+            token: JSON.parse(localStorage.getItem("token")),
+          },
+        }
+      )
       .then(() => {
         getallItems();
       })

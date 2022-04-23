@@ -12,11 +12,19 @@ const Home = () => {
 
   const getAllProducts = () => {
     axios
-      .get("/user/product/all")
+      .get("/user/product/all", {
+        headers: {
+          token: JSON.parse(localStorage.getItem("token")),
+        },
+      })
       .then((data) => {
         setProducts(data.data);
         axios
-          .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`)
+          .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`, {
+            headers: {
+              token: JSON.parse(localStorage.getItem("token")),
+            },
+          })
           .then((data) => {
             sessionStorage.setItem("items", JSON.stringify(data.data));
             dispatch(get_cart_items(data.data));

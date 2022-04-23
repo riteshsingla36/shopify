@@ -12,7 +12,12 @@ const Orders = () => {
       .get(
         `/cart?user=${
           JSON.parse(localStorage.getItem("user"))._id
-        }&active=false`
+        }&active=false`,
+        {
+          headers: {
+            token: JSON.parse(localStorage.getItem("token")),
+          },
+        }
       )
       .then((data) => {
         setOrders(data.data);

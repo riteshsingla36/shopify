@@ -3,3 +3,13 @@
     text-align: center;
 
 }
+
+.update-quantity {
+    position: relative;
+}
+
+.down-arrow {
+        position: absolute;
+    left: 0px;
+    top: 7px;
+}

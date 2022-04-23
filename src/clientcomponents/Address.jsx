@@ -31,9 +31,17 @@ const Address = () => {
     };
     script.onload = async () => {
       try {
-        const result = await axios.post("/create-order", {
-          amount: JSON.parse(sessionStorage.getItem("total")) + "00",
-        });
+        const result = await axios.post(
+          "/create-order",
+          {
+            amount: JSON.parse(sessionStorage.getItem("total")) + "00",
+          },
+          {
+            headers: {
+              token: JSON.parse(localStorage.getItem("token")),
+            },
+          }
+        );
         const { amount, id: order_id, currency } = result.data;
         const {
           data: { key: razorpayKey },
@@ -49,9 +57,13 @@ const Address = () => {
           .catch((err) => alert("address not found"));
 
         const items = await axios
-          .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`)
+          .get(`/item?cart=${JSON.parse(localStorage.getItem("cart"))}`, {
+            headers: {
+              token: JSON.parse(localStorage.getItem("token")),
+            },
+          })
           .then((data) => data.data);
-        // console.log(...items);
+ 
 
         const options = {
           key: razorpayKey,
@@ -70,14 +82,27 @@ const Address = () => {
                 razorpaySignature: res.razorpay_signature,
                 address: address,
                 products: [...items],
+              },
+              {
+                headers: {
+                  token: JSON.parse(localStorage.getItem("token")),
+                },
               }
             );
 
             //creating new cart after successful payment
             axios
-              .post("/cart", {
-                user: JSON.parse(localStorage.getItem("user"))._id,
-              })
+              .post(
+                "/cart",
+                {
+                  user: JSON.parse(localStorage.getItem("user"))._id,
+                },
+                {
+                  headers: {
+                    token: JSON.parse(localStorage.getItem("token")),
+                  },
+                }
+              )
               .then((data) => {
                 localStorage.setItem("cart", JSON.stringify(data.data._id));
                 console.log("new cart allotaed");
