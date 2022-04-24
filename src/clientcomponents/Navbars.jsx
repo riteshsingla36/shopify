@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbars.css";
 import { useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbars = () => {
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");
   const cartItems = useSelector((store) => store.cartReducer.cartItems);
+  const [small, setSmall] = useState(false);
   return (
     <div className="navbars">
       <img
@@ -19,9 +21,10 @@ const Navbars = () => {
         onClick={() => navigate("/")}
       />
       {auth ? (
-        <span className="navbars-right">
+        <span className={small ? "navbars-right hide" : "navbars-right"}>
           <span onClick={() => navigate("/orders")}>Orders</span>
           <span
+            className="nav-center-cart"
             style={{ position: "relative" }}
             onClick={() => navigate("/cart")}
           >
@@ -40,11 +43,16 @@ const Navbars = () => {
           </span>
         </span>
       ) : (
-        <span className="navbars-right">
+        <span className={small ? "navbars-right hide" : "navbars-right"}>
+          <span></span>
           <span onClick={() => navigate("/login")}>Login</span>
           <span onClick={() => navigate("/signup")}>Signup</span>
         </span>
       )}
+
+      <div className="ham" onClick={() => setSmall(!small)}>
+        <GiHamburgerMenu />
+      </div>
     </div>
   );
 };
