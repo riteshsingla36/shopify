@@ -35,6 +35,16 @@ router.patch("/:id", authenticator, async (req, res) => {
         res.json({ error: err.message })
     }
 })
+
+router.delete("/deleteall/:id", authenticator, async (req, res) => {
+    try {
+        const item = await Item.deleteMany({ cart: req.params.id })
+        res.json(item)
+    }
+    catch (err) {
+        res.json({ error: err.message })
+    }
+})
 router.delete("/:id", authenticator, async (req, res) => {
     try {
         const item = await Item.findByIdAndDelete(req.params.id)

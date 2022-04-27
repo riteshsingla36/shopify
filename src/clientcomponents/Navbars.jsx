@@ -20,6 +20,11 @@ const Navbars = () => {
         alt=""
         onClick={() => navigate("/")}
       />
+
+      <div className="search">
+        <input type="text" />
+        <span>🔍</span>
+      </div>
       {auth ? (
         <span className={small ? "navbars-right hide" : "navbars-right"}>
           <span onClick={() => navigate("/orders")}>Orders</span>

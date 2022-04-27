@@ -31,7 +31,7 @@ router.post("/signup", async (req, res) => {
     if (req.body.name && req.body.email && req.body.password) {
         try {
             const user = await User.create(req.body)
-            Jwt.sign({ user }, process.env.JWT_KEY, { expiresIn: "2h" }, (err, token) => {
+            Jwt.sign({ user }, process.env.JWT_KEY, { expiresIn: "200h" }, (err, token) => {
                 if (err) {
                     res.json({ error: "please check details again" })
                 }
@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
 
     try {
         const user = await User.findOne(req.body).select("-password")
-        Jwt.sign({ user }, process.env.JWT_KEY, { expiresIn: "2h" }, (err, token) => {
+        Jwt.sign({ user }, process.env.JWT_KEY, { expiresIn: "200h" }, (err, token) => {
             if (err) {
                 res.status(400).json({ error: err.message })
             }

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const Address = () => {
   const navigate = useNavigate();
-  if (JSON.parse(sessionStorage.getItem("total")) ===0) {
-      navigate("/cart")
+  if (JSON.parse(sessionStorage.getItem("total")) === 0) {
+    navigate("/cart");
   }
   const [addresses, setAddresses] = useState([]);
   const [currentAdd, setCurrentAdd] = useState("");
@@ -63,7 +63,6 @@ const Address = () => {
             },
           })
           .then((data) => data.data);
- 
 
         const options = {
           key: razorpayKey,
@@ -90,6 +89,17 @@ const Address = () => {
               }
             );
 
+            // deleting all previous items existing for this cart
+
+            axios.delete(
+              `/item/deleteall/${JSON.parse(localStorage.getItem("cart"))}`,
+              {
+                headers: {
+                  token: JSON.parse(localStorage.getItem("token")),
+                },
+              }
+            );
+
             //creating new cart after successful payment
             axios
               .post(
@@ -105,9 +115,11 @@ const Address = () => {
               )
               .then((data) => {
                 localStorage.setItem("cart", JSON.stringify(data.data._id));
-                console.log("new cart allotaed");
               });
             navigate("/");
+            localStorage.removeItem("total")
+            localStorage.removeItem("address")
+            localStorage.removeItem("rzp_device_id")
             alert(result.data.msg);
             sessionStorage.clear();
             window.location.reload();
